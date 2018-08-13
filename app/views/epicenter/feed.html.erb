@@ -1,0 +1,47 @@
+<!-- <h1>@<%= current_user.username %>'s Twitter Feed</h1>
+
+<p>Here's what your friends are saying...</p> <br> -->
+
+<div class="d-flex">
+  <div class="col-md-3">
+    <div class="card-left">
+      <div class="left-card-blue"></div>
+      <%= image_tag current_user.avatar.url, class: 'rounded-circle', id: 'profile-pic' %>
+      <div class="text-center">  
+        <h4 class="username-left"><%= current_user.name %></h4>
+        <p class="text-muted">@<%= current_user.username %></p>
+      </div>
+      <div class="row m-auto">
+        <p class="col-md-4 profile-stats">Tweets</p>
+        <p class="col-md-4 profile-stats">Following</p>
+        <p class="col-md-4 profile-stats">Followers</p>
+      </div>
+      <div class="row m-auto">
+        <p class="col-md-4 profile-stats-num">212</p>
+        <p class="col-md-4 profile-stats-num">102</p>
+        <p class="col-md-4 profile-stats-num">34</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-6 p-0">
+    <div class="home-tweet-box">
+      <%= image_tag current_user.avatar.url, class: 'rounded-circle', id: 'nav-profile-pic' %>
+      <input type="text" class="tweet-input" placeholder="What's happening?"><span class="insert-pic glyphicon glyphicon-picture"></span>
+    </div>
+
+    
+      <% @following_tweets.each do |tweet| %>
+        <div class="card tweet">
+          <%= image_tag current_user.avatar.url, class: 'rounded-circle', id: 'tweet-profile-pic' %>
+            <div class="tweet-content">
+              <p class="mb-1"><span style="font-weight: bold"><%= tweet.user.name %></span>
+                @<%= link_to tweet.user.username, show_user_path(id: tweet.user.id) %> &bull; <%= time_ago_in_words(tweet.created_at) %></p>
+              <p><%= tweet.message.html_safe %></p>
+            </div>
+        </div>
+      <% end %>
+  </div>
+
+</div>

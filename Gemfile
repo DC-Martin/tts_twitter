@@ -5,6 +5,7 @@ ruby '2.4.4'
 
 gem 'bootstrap', '~> 4.1.3'
 gem 'jquery-rails'
+#carrierwave is a file uploader
 gem 'carrierwave'
 gem 'font-awesome-rails'
 gem 'devise'

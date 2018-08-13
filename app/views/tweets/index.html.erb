@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Tweets</h1>
+
+<table>
+<!--   <thead class="text-center">
+    <tr>
+      <th>User</th>
+      <th>Message</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead> -->
+
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td>
+          <% unless tweet.user.avatar.url == nil %>
+            <%= image_tag tweet.user.avatar.url, size: 35, class: 'rounded-circle' %> 
+          <% end %>
+          <b>@<%= link_to tweet.user.username, show_user_path(id: tweet.user.id) %></b></td>
+        <td><%= tweet.message.html_safe %></td>
+        <td><%= link_to 'Show', tweet %></td>
+        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+        <td><%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= link_to 'New Tweet', new_tweet_path, class: "btn btn-primary text-white tweet-btn" %>

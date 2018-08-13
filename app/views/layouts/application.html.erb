@@ -7,9 +7,72 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li>
+                    <%= link_to root_path do %>
+                    <span class="navbar-link"><i class="fas fa-home"></i> Home</span>
+                    <% end %>
+                </li>
+
+                 <li>   
+                    <%= link_to new_tweet_path do %>
+                    <span class="navbar-link"><i class="fas fa-bolt"> Moments</i></span>
+                    <% end %>
+                </li>
+
+                <li>   
+                    <%= link_to new_tweet_path do %>
+                    <span class="navbar-link"><i class="far fa-bell"> Notifications</i></span>
+                    <% end %>
+                </li>
+
+                <li>   
+                    <%= link_to new_tweet_path do %>
+                    <span class="navbar-link"><i class="fas fa-envelope"> Messages</i></span>
+                    <% end %>
+                </li>
+            </ul>
+            <ul class="navbar-nav mx-auto">
+                <li>
+                    <i class="fab fa-twitter bird-icon"></i>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li><form class="navbar-form navbar-right mt-2">
+                <input type="text" class="form-control nav-search" placeholder="Search Twitter">
+                <span class="nav-search-icon fas fa-search"></span></li>
+                
+                <% if user_signed_in? %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <% if current_user.avatar.blank? == false %>
+                                <%= image_tag current_user.avatar.url, size:32, class: 'rounded-circle hand'%>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+                                    <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                                </div>
+                            <% end %>
+                            <li>
+                                <%= link_to new_tweet_path do %>
+                                <button class="btn tweet-button mt-1">Tweet</button>
+                                <% end %>
+                            </li>
+                        </a>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    </nav>
+    
     <div class="container">
       <%= yield %>
     </div>

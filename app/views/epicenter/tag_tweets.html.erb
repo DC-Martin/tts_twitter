@@ -1,0 +1,8 @@
+<h1><%= @tag.phrase %></h1>
+
+<% @tag.tweets.order(created_at: :desc).each do |tweet| %>
+  <%= tweet.user.name %> <%= link_to "@#{tweet.user.username}", show_user_path(id: tweet.user.id) %>
+  &bull; <%= time_ago_in_words(tweet.created_at)%> ago
+
+  <%= tweet.message.html_safe %>
+<% end %>
